@@ -38,6 +38,7 @@ import net.sourceforge.tess4j.util.LoadLibs;
 public class TessAPI1 implements Library, ITessAPI {
 
     static {
+        Native.register(LoadLibs.getLeptLibName());
         Native.register(LoadLibs.getTesseractLibName());
     }
 
