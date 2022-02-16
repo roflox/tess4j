@@ -22,6 +22,7 @@ import java.nio.IntBuffer;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import com.sun.jna.Platform;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -38,7 +39,9 @@ import net.sourceforge.tess4j.util.LoadLibs;
 public class TessAPI1 implements Library, ITessAPI {
 
     static {
-        Native.register(LoadLibs.getLeptLibName());
+        if(Platform.isLinux()) {
+            Native.loadLibrary(LoadLibs.getLeptLibName(), Library.class);
+        }
         Native.register(LoadLibs.getTesseractLibName());
     }
 
