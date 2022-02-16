@@ -42,6 +42,7 @@ public class TessAPI1 implements Library, ITessAPI {
         if(Platform.isLinux()) {
             Native.loadLibrary("lept", Library.class);
             Native.loadLibrary("gomp", Library.class);
+            Native.loadLibrary("libc", Library.class);
         }
         Native.register(LoadLibs.getTesseractLibName());
     }
