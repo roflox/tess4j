@@ -58,8 +58,6 @@ public class LoadLibs {
      */
     public static final String LIB_NAME = "libtesseract501";
     public static final String LIB_NAME_NON_WIN = "tesseract";
-    public static final String LEPT_LIB_NAME_NON_WIN = "lept";
-    public static final String LEPT_LIB_NAME = "liblept1820";
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(new LoggHelper().toString());
 
@@ -97,16 +95,6 @@ public class LoadLibs {
      */
     public static String getTesseractLibName() {
         return Platform.isWindows() ? LIB_NAME : LIB_NAME_NON_WIN;
-    }
-
-    /**
-     * Gets native library name.
-     *
-     * @return the name of the tesseract library to be loaded using the
-     * <code>Native.register()</code>.
-     */
-    public static String getLeptLibName() {
-        return Platform.isWindows() ? LEPT_LIB_NAME : LEPT_LIB_NAME_NON_WIN;
     }
 
     /**
