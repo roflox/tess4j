@@ -105,7 +105,7 @@
                     <target>1.8</target>
                     <debug>false</debug>
                 </configuration>
-            </plugin>
+	</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -127,6 +127,7 @@
                     <includeEmptyDirs>true</includeEmptyDirs>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
