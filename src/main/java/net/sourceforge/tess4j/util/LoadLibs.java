@@ -27,6 +27,8 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import net.sourceforge.lept4j.ILeptonica;
+import net.sourceforge.lept4j.Leptonica;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jboss.vfs.VFS;
@@ -56,6 +58,8 @@ public class LoadLibs {
      */
     public static final String LIB_NAME = "libtesseract501";
     public static final String LIB_NAME_NON_WIN = "tesseract";
+    public static final String LEPT_LIB_NAME_NON_WIN = "leptonica";
+    public static final String LEPT_LIB_NAME = "liblept1820";
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(new LoggHelper().toString());
 
@@ -82,6 +86,7 @@ public class LoadLibs {
      * <code>Native.loadLibrary()</code>.
      */
     public static TessAPI getTessAPIInstance() {
+        ILeptonica leptonica = (ILeptonica) Native.loadLibrary(getLeptLibName(), ILeptonica.class);
         return (TessAPI) Native.loadLibrary(getTesseractLibName(), TessAPI.class);
     }
 
@@ -93,6 +98,16 @@ public class LoadLibs {
      */
     public static String getTesseractLibName() {
         return Platform.isWindows() ? LIB_NAME : LIB_NAME_NON_WIN;
+    }
+
+    /**
+     * Gets native library name.
+     *
+     * @return the name of the tesseract library to be loaded using the
+     * <code>Native.register()</code>.
+     */
+    public static String getLeptLibName() {
+        return Platform.isWindows() ? LEPT_LIB_NAME : LEPT_LIB_NAME_NON_WIN;
     }
 
     /**
