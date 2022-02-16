@@ -27,6 +27,7 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import com.sun.jna.Library;
 import net.sourceforge.lept4j.ILeptonica;
 import net.sourceforge.lept4j.Leptonica;
 import org.apache.commons.io.FileUtils;
@@ -84,6 +85,12 @@ public class LoadLibs {
      * <code>Native.loadLibrary()</code>.
      */
     public static TessAPI getTessAPIInstance() {
+        if(Platform.isLinux()) {
+            Native.loadLibrary("lept", Library.class);
+            Native.loadLibrary("gomp", Library.class);
+            Native.loadLibrary("libc", Library.class);
+            Native.loadLibrary("libpng16", Library.class);
+        }
         return (TessAPI) Native.loadLibrary(getTesseractLibName(), TessAPI.class);
     }
 
