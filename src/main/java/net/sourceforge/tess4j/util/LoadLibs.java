@@ -15,6 +15,16 @@
  */
 package net.sourceforge.tess4j.util;
 
+import com.sun.jna.Library;
+import com.sun.jna.Native;
+import com.sun.jna.Platform;
+import net.sourceforge.tess4j.TessAPI;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.jboss.vfs.VFS;
+import org.jboss.vfs.VirtualFile;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,20 +36,6 @@ import java.net.URLConnection;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import com.sun.jna.Library;
-import net.sourceforge.lept4j.ILeptonica;
-import net.sourceforge.lept4j.Leptonica;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.jboss.vfs.VFS;
-import org.jboss.vfs.VirtualFile;
-import org.slf4j.LoggerFactory;
-
-import com.sun.jna.Native;
-import com.sun.jna.Platform;
-
-import net.sourceforge.tess4j.TessAPI;
 
 /**
  * Loads native libraries from JAR or project folder.
@@ -86,10 +82,15 @@ public class LoadLibs {
      */
     public static TessAPI getTessAPIInstance() {
         if(Platform.isLinux()) {
-            Native.loadLibrary("lept", Library.class);
-            Native.loadLibrary("gomp", Library.class);
+            System.out.println("Loading Linux libraries form JAR");
             Native.loadLibrary("libc", Library.class);
-            Native.loadLibrary("libpng16", Library.class);
+            System.out.println("loaded libc");
+            Native.loadLibrary("png", Library.class);
+            System.out.println("loaded png");
+            Native.loadLibrary("gomp", Library.class);
+            System.out.println("loaded gomp");
+            Native.loadLibrary("lept", Library.class);
+            System.out.println("loaded lept");
         }
         return (TessAPI) Native.loadLibrary(getTesseractLibName(), TessAPI.class);
     }

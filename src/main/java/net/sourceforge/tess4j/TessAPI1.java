@@ -15,22 +15,21 @@
  */
 package net.sourceforge.tess4j;
 
-import java.nio.ByteBuffer;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-
+import com.ochafik.lang.jnaerator.runtime.NativeSize;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
-import com.ochafik.lang.jnaerator.runtime.NativeSize;
 import net.sourceforge.lept4j.Boxa;
 import net.sourceforge.lept4j.Pix;
 import net.sourceforge.tess4j.util.LoadLibs;
+
+import java.nio.ByteBuffer;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 /**
  * A Java wrapper for <code>Tesseract OCR 4.1.0 API</code> using
@@ -40,10 +39,15 @@ public class TessAPI1 implements Library, ITessAPI {
 
     static {
         if(Platform.isLinux()) {
-            Native.loadLibrary("lept", Library.class);
-            Native.loadLibrary("gomp", Library.class);
+            System.out.println("Loading Linux libraries form JAR");
             Native.loadLibrary("libc", Library.class);
-            Native.loadLibrary("libpng16", Library.class);
+            System.out.println("loaded libc");
+            Native.loadLibrary("png", Library.class);
+            System.out.println("loaded png");
+            Native.loadLibrary("gomp", Library.class);
+            System.out.println("loaded gomp");
+            Native.loadLibrary("lept", Library.class);
+            System.out.println("loaded lept");
         }
         Native.register(LoadLibs.getTesseractLibName());
     }
