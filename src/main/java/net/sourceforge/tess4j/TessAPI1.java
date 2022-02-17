@@ -42,6 +42,8 @@ public class TessAPI1 implements Library, ITessAPI {
             System.out.println("Loading Linux libraries form JAR");
             Native.loadLibrary("libc", Library.class);
             System.out.println("loaded libc");
+            Native.loadLibrary("z", Library.class);
+            System.out.println("loaded libz");
             Native.loadLibrary("png", Library.class);
             System.out.println("loaded png");
             Native.loadLibrary("gomp", Library.class);

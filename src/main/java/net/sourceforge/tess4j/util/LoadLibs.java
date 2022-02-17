@@ -85,6 +85,8 @@ public class LoadLibs {
             System.out.println("Loading Linux libraries form JAR");
             Native.loadLibrary("libc", Library.class);
             System.out.println("loaded libc");
+            Native.loadLibrary("zlib", Library.class);
+            System.out.println("loaded zlib");
             Native.loadLibrary("png", Library.class);
             System.out.println("loaded png");
             Native.loadLibrary("gomp", Library.class);
